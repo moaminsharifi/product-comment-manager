@@ -29,7 +29,7 @@ class UserController extends Controller
      * @param  StoreUserRequest  $request
      * @return UserResource
      */
-    public function store(StoreUserRequest $request)
+    public function signup(StoreUserRequest $request)
     {
         $user = $this->service->create($request);
         return new UserResource($user);
