@@ -4,8 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Product;
-use App\Models\User;
+
 class Comment extends Model
 {
     use HasFactory;
@@ -23,7 +22,7 @@ class Comment extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_comment', 'comment_id', 'user_id' );
+        return $this->belongsToMany(User::class, 'user_comment', 'comment_id', 'user_id');
     }
 
     /**
@@ -31,9 +30,6 @@ class Comment extends Model
      */
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'product_comment', 'comment_id', 'product_id' );
+        return $this->belongsToMany(Product::class, 'product_comment', 'comment_id', 'product_id');
     }
-
-
-
 }
