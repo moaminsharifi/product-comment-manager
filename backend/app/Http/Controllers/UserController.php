@@ -2,84 +2,88 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\UpdatePasswordUserRequest;
+use App\Http\Requests\LoginUserRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
-use Illuminate\Http\Request;
-
+use App\Services\UserService;
 class UserController extends Controller
 {
+    protected $service;
     /**
-     * Display a listing of the resource.
+     * Contractor function
      *
-     * @return \Illuminate\Http\Response
+     * @param UserService $service
      */
-    public function index()
-    {
-        //
+    public function __construct(UserService $service) {
+        $this->service = $service;
     }
+    
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  StoreUserRequest  $request
+     * @return UserResource
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+        $user = $this->service->create($request);
+        return new UserResource($user);
     }
 
     /**
-     * Display the specified resource.
+     * Display User Info
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @param  User  $user
+     * @return UserResource
      */
     public function show(User $user)
     {
-        //
+        return new UserResource($user);
+    }
+
+
+    /**
+     * Update fields of User
+     *
+     * @param  UpdateUserRequest  $request
+     * @param  User  $user
+     * @return UserResource
+     */
+    public function update(UpdateUserRequest $request, User $user)
+    {
+        $user = $this->service->update($user , $request);
+        return new UserResource($user);
+    }
+
+
+     /**
+     * Update Password of user
+     *
+     * @param  UpdatePasswordUserRequest  $request
+     * @param  User  $user
+     * @return UserResource
+     */
+    public function updatePassword(UpdatePasswordUserRequest $request, User $user)
+    {
+        $user = $this->service->updatePassword($user , $request);
+        return new UserResource($user);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Login User
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @param  LoginUserRequest  $request
+     * @param  User  $user
+     * @return UserResource
      */
-    public function edit(User $user)
+    public function login(LoginUserRequest $request)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, User $user)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
-    {
-        //
+        $user = $this->service->login($request);
+        return new UserResource($user);
     }
 }
