@@ -10,6 +10,7 @@ use App\Models\User;
 
 class GetDataTest extends TestCase
 {
+    use RefreshDatabase;
     private $jsonStructUserData =  [
         'data'=>[
             'token',
