@@ -21,8 +21,14 @@ class ProductController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Products list.
+     * 
+     * This endpoint show all products with their comments.
      *
+     *
+     * @authenticated
+     * @responseFile status=200 docs/responses/product/index.success.json
+     
      * @return \Illuminate\Http\Response
      */
     public function index()

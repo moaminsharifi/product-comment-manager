@@ -25,8 +25,11 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store User
+     * 
+     *  This endpoint Sing up new user and return token.
      *
+     * @responseFile status=200 docs/responses/user/data.success.json
      * @param  StoreUserRequest  $request
      * @return UserResource
      */
@@ -39,7 +42,12 @@ class UserController extends Controller
 
     /**
      * Display User Info.
+     * 
+     * This endpoint Get (logged) user with new token.
      *
+     *
+     * @authenticated
+     * @responseFile status=200 docs/responses/user/data.success.json
      * @param  User  $user
      * @return UserResource
      */
@@ -52,7 +60,7 @@ class UserController extends Controller
 
     /**
      * Update fields of User.
-     *
+     
      * @param  UpdateUserRequest  $request
      * @param  User  $user
      * @return UserResource
@@ -81,6 +89,11 @@ class UserController extends Controller
     /**
      * Login User.
      *
+     *  This endpoint Log user and return token.
+     *
+     * @responseFile status=200 docs/responses/user/data.success.json
+     * @responseFile status=422 scenario="Invalid Email"  docs/responses/user/login.invalid_email.json
+     * @responseFile status=422 scenario="Invalid Password"  docs/responses/user/login.invalid_password.json
      * @param  LoginUserRequest  $request
      * @param  User  $user
      * @return UserResource
