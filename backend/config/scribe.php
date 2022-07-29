@@ -19,7 +19,7 @@ return [
     /*
      * The base URL displayed in the docs. If this is empty, Scribe will use the value of config('app.url').
      */
-    'base_url' => null,
+    'base_url' => '127.0.0.1:8080',
 
     /*
      * Tell Scribe what routes to generate documentation for.
@@ -148,7 +148,7 @@ return [
          * HTML documentation, assets and Postman collection will be generated to this folder.
          * Source Markdown will still be in resources/docs.
          */
-        'output_path' => 'public/docs',
+        'output_path' => 'docs',
     ],
 
     /*
