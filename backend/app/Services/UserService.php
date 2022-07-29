@@ -63,7 +63,7 @@ class UserService extends Service implements UserServiceInterface
      */
     public function create(StoreUserRequest $request): User
     {
-        $request->validate();
+        $request->validated();
         $attributes = $request->all();
         $attributes['password'] = Hash::make($attributes['password']);
 
@@ -78,7 +78,7 @@ class UserService extends Service implements UserServiceInterface
      */
     public function update(User $user, UpdateUserRequest $request): User
     {
-        $request->validate();
+        $request->validated();
         $attributes = $request->only(['name']);
 
         return $this->repository->update($user->id, [
@@ -94,7 +94,7 @@ class UserService extends Service implements UserServiceInterface
      */
     public function updatePassword(User $user, UpdatePasswordUserRequest $request): User
     {
-        $request->validate();
+        $request->validated();
         $attributes = $request->only(['password', 'old_password']);
         abort_unless(Hash::check($attributes['old_password'], $user->password), CustomResponse::createError('10002'));
         return $this->repository->update($user->id, [
@@ -109,7 +109,7 @@ class UserService extends Service implements UserServiceInterface
      */
     public function login(LoginUserRequest $request): User
     {
-        $request->validate();
+        $request->validated();
         $attributes = $request->only(['email', 'password']);
         $user = $this->repository->getByEmail($attributes['email']);
         abort_unless($user, CustomResponse::createError('10001') );
