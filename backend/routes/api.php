@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,4 +26,17 @@ Route::group([
     ], function () {
         Route::get('user', [UserController::class, 'show'])->name('userData');
     });
+});
+Route::group([
+    'prefix' => 'products',
+    'middleware' => 'auth:sanctum',
+], function () {
+    Route::get('/', [ProductController::class, 'index'])->name('getAllProducts');
+});
+
+Route::group([
+    'prefix' => 'comments',
+    'middleware' => 'auth:sanctum',
+], function () {
+    Route::post('/', [CommentController::class, 'store'])->name('AddNewComment');
 });
