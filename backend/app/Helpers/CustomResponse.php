@@ -16,7 +16,6 @@ class CustomResponse extends Facade
     public static function createSuccess($data = [])
     {
         $responseData = [
-            'ok' => 1,
             'data' => $data,
         ];
 
@@ -33,7 +32,7 @@ class CustomResponse extends Facade
     public static function createError(string $errorCode = '00001', $errorData = [])
     {
         $responseData = [
-            'ok' => 0,
+
             'error' => CustomError::create($errorCode),
             'data' => $errorData,
         ];
@@ -51,7 +50,7 @@ class CustomResponse extends Facade
     public static function createErrorString(string $errorCode, $errorData = [])
     {
         return [
-            'ok' => false,
+
             'error' => CustomError::create($errorCode),
             'data' => $errorData,
         ];
