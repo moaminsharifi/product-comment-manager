@@ -135,6 +135,7 @@ $finder = Finder::create()
         __DIR__ . '/app',
         __DIR__ . '/routes',
         __DIR__ . '/tests',
+        __DIR__ . '/config',
     ])
     ->name('*.php')
     ->notName('*.blade.php')
