@@ -9,6 +9,17 @@ use Illuminate\Database\Eloquent\Collection;
 class ProductRepository extends Repository implements ProductRepositoryInterface
 {
     /**
+     * return first item or create one.
+     *
+     * @param array $attributes
+     * @return Product
+     */
+    public function firstOrCreate(array $attributes):Product
+    {
+        return Product::firstOrCreate($attributes);
+    }
+
+    /**
      * get All products.
      *
      * @return Collection
