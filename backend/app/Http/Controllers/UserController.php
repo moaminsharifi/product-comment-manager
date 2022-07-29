@@ -25,11 +25,16 @@ class UserController extends Controller
     }
 
     /**
-     * Store User
-     * 
+     * Store User.
+     *
      *  This endpoint Sing up new user and return token.
      *
      * @responseFile status=200 docs/responses/user/data.success.json
+     * @responseFile status=422 scenario="Invalid Name"  docs/responses/user/singup.invalid.name.json
+     * @responseFile status=422 scenario="Invalid Email"  docs/responses/user/singup.invalid.email.json
+     * @responseFile status=422 scenario="Invalid Email (exist in database)"  docs/responses/user/singup.invalid_exist.email.json
+     * @responseFile status=422 scenario="Invalid Password"  docs/responses/user/singup.invalid.password.json
+     * @responseFile status=422 scenario="Invalid Password (miss match with password_confirm)"  docs/responses/user/singup.invalid_miss_match.password.json
      * @param  StoreUserRequest  $request
      * @return UserResource
      */
@@ -42,7 +47,7 @@ class UserController extends Controller
 
     /**
      * Display User Info.
-     * 
+     *
      * This endpoint Get (logged) user with new token.
      *
      *
@@ -60,7 +65,7 @@ class UserController extends Controller
 
     /**
      * Update fields of User.
-     
+     * @hideFromAPIDocumentation
      * @param  UpdateUserRequest  $request
      * @param  User  $user
      * @return UserResource
@@ -74,7 +79,7 @@ class UserController extends Controller
 
     /**
      * Update Password of user.
-     *
+     * @hideFromAPIDocumentation
      * @param  UpdatePasswordUserRequest  $request
      * @param  User  $user
      * @return UserResource
