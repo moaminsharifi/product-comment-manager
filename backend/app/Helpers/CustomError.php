@@ -60,6 +60,18 @@ class CustomError
             'shortener' => 'forbidden',
         ],
 
+        /*
+         * Product and Comment Part - 20
+         */
+        '20001' => [
+            'message' => 'Can not add new comment',
+            'shortener' => 'server',
+        ],
+        '20002' => [
+            'message' => 'User Already added 2 comment',
+            'shortener' => 'unprocessable_request',
+        ],
+
     ];
 
     public static function create(string $errorCode = '00001')
