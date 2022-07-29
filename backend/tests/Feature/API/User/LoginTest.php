@@ -52,5 +52,55 @@ class LoginTest extends TestCase
         ]);
     }
 
+     /**
+     * user can not login with bad email test
+     * @test
+     * @group API
+     * @group User
+     * @group Feature
+     * @return void
+     */
+    public function user_can_not_login_with_bad_email(){
+        // prepare data
+        $user = User::factory()->create();
+        $userDataForLogin = [
+            'email'=>  'NOTVALID@local.com',
+            'password'=>'password',
+        ];
+        // before send assertion
+        $this->assertDatabaseCount('users',1);
+
+        // send request
+        $response = $this->json('POST' , route('api.login'), $userDataForLogin);
+       
+        // after send request assertion
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+
+     /**
+     * user can not login with bad password test
+     * @test
+     * @group API
+     * @group User
+     * @group Feature
+     * @return void
+     */
+    public function user_can_not_login_with_bad_password(){
+        $user = User::factory()->create();
+        $userDataForLogin = [
+            'email'=>  $user->email,
+            'password'=>'NOT_VALID_password',
+        ];
+        // before send assertion
+        $this->assertDatabaseCount('users',1);
+
+        // send request
+        $response = $this->json('POST' , route('api.login'), $userDataForLogin);
+       
+        // after send request assertion
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
 
 }
