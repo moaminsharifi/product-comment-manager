@@ -8,6 +8,7 @@ use Tests\TestCase;
 use Illuminate\Http\Response;
 class SingUpTest extends TestCase
 {
+    use RefreshDatabase;
     private $jsonStructUserData =  [
         'data'=>[
             'token',
