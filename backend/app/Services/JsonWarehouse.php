@@ -13,4 +13,9 @@ class JsonWarehouse extends BaseWarehouse
     public function increment(string $key)
     {
     }
+    public function get(string $key){
+
+    }
+
+
 }
