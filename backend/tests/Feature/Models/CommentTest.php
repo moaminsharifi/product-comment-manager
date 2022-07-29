@@ -2,17 +2,15 @@
 
 namespace Tests\Feature\Models;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use Illuminate\Support\Facades\Schema;
-use App\Models\User;
 use App\Models\Product;
-use Illuminate\Database\Eloquent\Collection;
+use App\Models\User;
+use Illuminate\Support\Facades\Schema;
+use Tests\TestCase;
+
 class CommentTest extends TestCase
 {
     /**
-     * comments database has expected columns test
+     * comments database has expected columns test.
      * @test
      * @group Feature
      * @group Comment
@@ -20,14 +18,16 @@ class CommentTest extends TestCase
      */
     public function comments_database_has_expected_columns()
     {
-        $this->assertTrue( 
+        $this->assertTrue(
             Schema::hasColumns('comments', [
-                'id','comment', 'created_at' , 'updated_at'
-            ]), 1);
+                'id', 'comment', 'created_at', 'updated_at',
+            ]),
+            1
+        );
     }
 
-     /**
-     * product belong to user test
+    /**
+     * product belong to user test.
      * @test
      * @group Feature
      * @group Comment
@@ -35,11 +35,10 @@ class CommentTest extends TestCase
      */
     public function product_belong_to_user()
     {
-        $user = User::factory()->create(); 
-        $product = Product::factory()->create(['creator_id' => $user->id]); 
+        $user = User::factory()->create();
+        $product = Product::factory()->create(['creator_id' => $user->id]);
 
         // check creator of user
         $this->assertInstanceOf(User::class, $product->creator);
-
     }
 }

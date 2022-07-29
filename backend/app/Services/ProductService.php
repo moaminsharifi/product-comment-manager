@@ -2,18 +2,11 @@
 
 namespace App\Services;
 
-use App\Contracts\ProductServiceInterface;
-use App\Helpers\CustomResponse;
-use App\Http\Requests\LoginProductRequest;
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdatePasswordProductRequest;
-use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use App\Repositories\ProductRepository;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Hash;
 
-class ProductService extends Service 
+class ProductService extends Service
 {
     /**
      * Constructor function.
@@ -56,6 +49,4 @@ class ProductService extends Service
     {
         return $this->repository->deleteById($id);
     }
-
-   
 }

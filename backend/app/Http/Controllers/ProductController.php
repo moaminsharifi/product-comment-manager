@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Services\CommentService;
-use App\Services\UserService;
+
 use App\Http\Resources\ProductResource;
 use App\Services\ProductService;
+
 class ProductController extends Controller
 {
-
     protected $service;
 
     /**
@@ -16,7 +15,7 @@ class ProductController extends Controller
 
      * @param ProductService $service
      */
-    public function __construct( ProductService $service)
+    public function __construct(ProductService $service)
     {
         $this->service = $service;
     }
