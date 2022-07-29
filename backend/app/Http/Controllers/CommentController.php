@@ -32,7 +32,7 @@ class CommentController extends Controller
      *
      * @authenticated
      *
-     * @responseFile status=200 docs/responses/comment/store.success.json
+     * @responseFile status=201 docs/responses/comment/store.success.json
      * @responseFile status=422 scenario="User write already 2 comment for this product" docs/responses/comment/store.user_has_more_than_2_comment.json
      * @param StoreCommentRequest  $request
      * @param CommentPolicy $policy
