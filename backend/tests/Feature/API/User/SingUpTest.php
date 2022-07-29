@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\API\User;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 use Tests\TestCase;
-use App\Models\User;
 
 class SingUpTest extends TestCase
 {
@@ -54,7 +54,7 @@ class SingUpTest extends TestCase
     }
 
     /**
-     * user can not sing up with bad email test
+     * user can not sing up with bad email test.
      * @test
      * @group API
      * @group User
@@ -91,12 +91,10 @@ class SingUpTest extends TestCase
         $response = $this->json('POST', route('api.signup'), $userDataForRegister);
         // after send request assertion
         $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
-
     }
 
-
-     /**
-     * user can not sing up with bad name test
+    /**
+     * user can not sing up with bad name test.
      * @test
      * @group API
      * @group User
@@ -125,11 +123,10 @@ class SingUpTest extends TestCase
         $response = $this->json('POST', route('api.signup'), $userDataForRegister);
         // after send request assertion
         $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
-
     }
 
     /**
-     * user can not sing up with bad password test
+     * user can not sing up with bad password test.
      * @test
      * @group API
      * @group User
@@ -170,7 +167,4 @@ class SingUpTest extends TestCase
         // after send request assertion
         $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
-
-
-
 }
