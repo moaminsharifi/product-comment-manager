@@ -42,6 +42,7 @@ class CommentController extends Controller
     {
         $user = auth()->user();
         $comment = $this->commentService->create($request, $user, $policy);
+
         return new CommentResource($comment);
     }
 }
