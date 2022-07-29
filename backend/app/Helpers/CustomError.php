@@ -53,7 +53,7 @@ class CustomError
         ],
         '10002' => [
             'message' => 'Password Not Correct',
-            'shortener' => 'bad_request',
+            'shortener' => 'unprocessable_request',
         ],
         '10003' => [
             'message' => 'User Not Admin',
