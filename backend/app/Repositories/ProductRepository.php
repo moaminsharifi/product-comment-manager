@@ -26,7 +26,7 @@ class ProductRepository extends Repository implements ProductRepositoryInterface
      */
     public function getAll(): Collection
     {
-        return Product::all();
+        return Product::with('comments')->get();
     }
 
     /**
