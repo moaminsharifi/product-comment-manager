@@ -1,0 +1,387 @@
+openapi: 3.0.3
+info:
+  title: 'Product Comment Manager'
+  description: 'api documentation with various version'
+  version: 1.0.0
+servers:
+  -
+    url: '127.0.0.1:8080'
+paths:
+  /api/auth/login:
+    post:
+      summary: 'Login User.'
+      description: 'This endpoint Log user and return token.'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 11
+                    name: laravel
+                    email: test@local.com
+                    token: 10|dlzWqb87FWA3adXJb0Rzmj471CMebyWKnj7jJkIC
+                    token_type: Bearer
+                properties:
+                  data:
+                    type: object
+                    example:
+                      id: 11
+                      name: laravel
+                      email: test@local.com
+                      token: 10|dlzWqb87FWA3adXJb0Rzmj471CMebyWKnj7jJkIC
+                      token_type: Bearer
+        422:
+          description: 'Invalid Password'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error:
+                    code: '10002'
+                    message: 'Password Not Correct'
+                  data: []
+                properties:
+                  error:
+                    type: object
+                    example:
+                      code: '10002'
+                      message: 'Password Not Correct'
+                  data:
+                    type: array
+                    example: []
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: louie22@example.com
+                password:
+                  type: string
+                  description: 'Must not be greater than 180 characters.'
+                  example: qvcrjhpzjazrhctlqovvhwmxyhyqjjfihlbuebjhdcwdsjfdaezschmluazadvixqkaznaoyiymnawksvhkmvqdqhopuyqiycubyifxbjnhtwjkvsuqxishanhxalyc
+              required:
+                - email
+                - password
+      security: []
+  /api/auth/signup:
+    post:
+      summary: 'Store User.'
+      description: 'This endpoint Sing up new user and return token.'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 11
+                    name: laravel
+                    email: test@local.com
+                    token: 10|dlzWqb87FWA3adXJb0Rzmj471CMebyWKnj7jJkIC
+                    token_type: Bearer
+                properties:
+                  data:
+                    type: object
+                    example:
+                      id: 11
+                      name: laravel
+                      email: test@local.com
+                      token: 10|dlzWqb87FWA3adXJb0Rzmj471CMebyWKnj7jJkIC
+                      token_type: Bearer
+        422:
+          description: 'Invalid Password (miss match with password_confirm)'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The name field is required. (and 2 more errors)'
+                  errors:
+                    name:
+                      - 'The name field is required.'
+                    password:
+                      - 'The password field is required.'
+                    password_confirm:
+                      - 'The password confirm and password must match.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The name field is required. (and 2 more errors)'
+                  errors:
+                    type: object
+                    example:
+                      name:
+                        - 'The name field is required.'
+                      password:
+                        - 'The password field is required.'
+                      password_confirm:
+                        - 'The password confirm and password must match.'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 180 characters. Must be at least 3 characters.'
+                  example: ad
+                email:
+                  type: string
+                  description: 'Must be a valid email address. Must not be greater than 180 characters.'
+                  example: ujcoulwp
+                password:
+                  type: string
+                  description: 'Must not be greater than 180 characters. Must be at least 6 characters.'
+                  example: ''
+                password_confirm:
+                  type: string
+                  description: 'The value and <code>password</code> must match. Must not be greater than 180 characters.'
+                  example: ujynsvjpodkrkdwawloyzhspgosuwtpaghwinbujajsqaiiupvhkoetioyntsjhubwcyreesafiwcnbpdrgysbgmekpdxvzknanuhwyyhzndl
+              required:
+                - name
+                - email
+                - password
+                - password_confirm
+      security: []
+  /api/auth/user:
+    get:
+      summary: 'Display User Info.'
+      description: 'This endpoint Get (logged) user with new token.'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 11
+                    name: laravel
+                    email: test@local.com
+                    token: 10|dlzWqb87FWA3adXJb0Rzmj471CMebyWKnj7jJkIC
+                    token_type: Bearer
+                properties:
+                  data:
+                    type: object
+                    example:
+                      id: 11
+                      name: laravel
+                      email: test@local.com
+                      token: 10|dlzWqb87FWA3adXJb0Rzmj471CMebyWKnj7jJkIC
+                      token_type: Bearer
+      tags:
+        - Endpoints
+  /api/products:
+    get:
+      summary: 'Products list.'
+      description: 'This endpoint show all products with their comments.'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 5
+                      name: b88ab94b-7971-3ec8-a307-48516b079106
+                      comments:
+                        -
+                          id: 7
+                          comment: 'Temporibus dolores nisi et autem reiciendis fugiat ut sed. Quia sapiente iusto distinctio eius rerum. Velit officiis cumque magni commodi et. Autem quasi magni sit voluptatem quibusdam.'
+                        -
+                          id: 8
+                          comment: 'Quia qui nobis dignissimos facere. Ab suscipit quaerat omnis hic illo maiores.'
+                        -
+                          id: 9
+                          comment: 'Et debitis odio sed dignissimos. Qui eaque eaque et et natus. Dignissimos tempora sed praesentium at numquam et dignissimos.'
+                        -
+                          id: 10
+                          comment: 'Enim sint sed sunt excepturi ut cum omnis ipsa. Exercitationem magnam voluptas ducimus eum quam.'
+                        -
+                          id: 11
+                          comment: 'Itaque excepturi culpa eius impedit ea. Et qui culpa sint odit.'
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 5
+                        name: b88ab94b-7971-3ec8-a307-48516b079106
+                        comments:
+                          -
+                            id: 7
+                            comment: 'Temporibus dolores nisi et autem reiciendis fugiat ut sed. Quia sapiente iusto distinctio eius rerum. Velit officiis cumque magni commodi et. Autem quasi magni sit voluptatem quibusdam.'
+                          -
+                            id: 8
+                            comment: 'Quia qui nobis dignissimos facere. Ab suscipit quaerat omnis hic illo maiores.'
+                          -
+                            id: 9
+                            comment: 'Et debitis odio sed dignissimos. Qui eaque eaque et et natus. Dignissimos tempora sed praesentium at numquam et dignissimos.'
+                          -
+                            id: 10
+                            comment: 'Enim sint sed sunt excepturi ut cum omnis ipsa. Exercitationem magnam voluptas ducimus eum quam.'
+                          -
+                            id: 11
+                            comment: 'Itaque excepturi culpa eius impedit ea. Et qui culpa sint odit.'
+                    items:
+                      type: object
+      tags:
+        - Endpoints
+  /api/comments:
+    post:
+      summary: 'Store Comment.'
+      description: 'This endpoint Add new comment to system. If product not exist then create anonymous product.'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 2
+                    comment: comment
+                properties:
+                  data:
+                    type: object
+                    example:
+                      id: 2
+                      comment: comment
+        422:
+          description: 'Invalid inputs'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 2
+                    comment: comment
+                properties:
+                  data:
+                    type: object
+                    example:
+                      id: 2
+                      comment: comment
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                productName:
+                  type: string
+                  description: 'Must not be greater than 180 characters. Must be at least 1 characters.'
+                  example: ''
+                comment:
+                  type: string
+                  description: 'Must not be greater than 10000 characters. Must be at least 1 characters.'
+                  example: b
+              required:
+                - productName
+                - comment
+tags:
+  -
+    name: Endpoints
+    description: ''

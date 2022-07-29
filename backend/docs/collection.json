@@ -1,0 +1,251 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "127.0.0.1:8080"
+        }
+    ],
+    "info": {
+        "name": "Product Comment Manager",
+        "_postman_id": "81ea36fa-f429-42e3-89f4-13baacffe3ff",
+        "description": "api documentation with various version",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "Login User.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/auth\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/auth\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"louie22@example.com\",\"password\":\"qvcrjhpzjazrhctlqovvhwmxyhyqjjfihlbuebjhdcwdsjfdaezschmluazadvixqkaznaoyiymnawksvhkmvqdqhopuyqiycubyifxbjnhtwjkvsuqxishanhxalyc\"}"
+                        },
+                        "description": "This endpoint Log user and return token.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":{\"id\":11,\"name\":\"laravel\",\"email\":\"test@local.com\",\"token\":\"10|dlzWqb87FWA3adXJb0Rzmj471CMebyWKnj7jJkIC\",\"token_type\":\"Bearer\"}}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"message\":\"The selected email is invalid.\",\"errors\":{\"email\":[\"The selected email is invalid.\"]}}",
+                            "name": "Invalid Email"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"error\":{\"code\":\"10002\",\"message\":\"Password Not Correct\"},\"data\":[]}",
+                            "name": "Invalid Password"
+                        }
+                    ]
+                },
+                {
+                    "name": "Store User.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/auth\/signup",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/auth\/signup"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"ad\",\"email\":\"ujcoulwp\",\"password\":\"\",\"password_confirm\":\"ujynsvjpodkrkdwawloyzhspgosuwtpaghwinbujajsqaiiupvhkoetioyntsjhubwcyreesafiwcnbpdrgysbgmekpdxvzknanuhwyyhzndl\"}"
+                        },
+                        "description": "This endpoint Sing up new user and return token.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\"data\":{\"id\":11,\"name\":\"laravel\",\"email\":\"test@local.com\",\"token\":\"10|dlzWqb87FWA3adXJb0Rzmj471CMebyWKnj7jJkIC\",\"token_type\":\"Bearer\"}}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"message\":\"The name field is required.\",\"errors\":{\"name\":[\"The name field is required.\"]}}",
+                            "name": "Invalid Name"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"message\":\"The email must be a valid email address.\",\"errors\":{\"email\":[\"The email must be a valid email address.\"]}}",
+                            "name": "Invalid Email"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"message\":\"The email has already been taken.\",\"errors\":{\"email\":[\"The email has already been taken.\"]}}",
+                            "name": "Invalid Email (exist in database)"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"message\":\"The password field is required. (and 1 more error)\",\"errors\":{\"password\":[\"The password field is required.\"],\"password_confirm\":[\"The password confirm and password must match.\"]}}",
+                            "name": "Invalid Password"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"message\":\"The name field is required. (and 2 more errors)\",\"errors\":{\"name\":[\"The name field is required.\"],\"password\":[\"The password field is required.\"],\"password_confirm\":[\"The password confirm and password must match.\"]}}",
+                            "name": "Invalid Password (miss match with password_confirm)"
+                        }
+                    ]
+                },
+                {
+                    "name": "Display User Info.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/auth\/user",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/auth\/user"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "This endpoint Get (logged) user with new token."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":{\"id\":11,\"name\":\"laravel\",\"email\":\"test@local.com\",\"token\":\"10|dlzWqb87FWA3adXJb0Rzmj471CMebyWKnj7jJkIC\",\"token_type\":\"Bearer\"}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Products list.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/products",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/products"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "This endpoint show all products with their comments."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":[{\"id\":5,\"name\":\"b88ab94b-7971-3ec8-a307-48516b079106\",\"comments\":[{\"id\":7,\"comment\":\"Temporibus dolores nisi et autem reiciendis fugiat ut sed. Quia sapiente iusto distinctio eius rerum. Velit officiis cumque magni commodi et. Autem quasi magni sit voluptatem quibusdam.\"},{\"id\":8,\"comment\":\"Quia qui nobis dignissimos facere. Ab suscipit quaerat omnis hic illo maiores.\"},{\"id\":9,\"comment\":\"Et debitis odio sed dignissimos. Qui eaque eaque et et natus. Dignissimos tempora sed praesentium at numquam et dignissimos.\"},{\"id\":10,\"comment\":\"Enim sint sed sunt excepturi ut cum omnis ipsa. Exercitationem magnam voluptas ducimus eum quam.\"},{\"id\":11,\"comment\":\"Itaque excepturi culpa eius impedit ea. Et qui culpa sint odit.\"}]}]}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Store Comment.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/comments",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/comments"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"productName\":\"\",\"comment\":\"b\"}"
+                        },
+                        "description": "This endpoint Add new comment to system. If product not exist then create anonymous product."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":{\"id\":2,\"comment\":\"comment\"}}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"data\":{\"id\":2,\"comment\":\"comment\"}}",
+                            "name": "Invalid inputs"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    }
+}
