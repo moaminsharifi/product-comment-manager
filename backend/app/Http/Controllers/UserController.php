@@ -9,6 +9,7 @@ use App\Http\Requests\LoginUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\UserService;
+use App\Helpers\CustomResponse;
 class UserController extends Controller
 {
     protected $service;
@@ -41,8 +42,9 @@ class UserController extends Controller
      * @param  User  $user
      * @return UserResource
      */
-    public function show(User $user)
+    public function show()
     {
+        $user = auth()->user();
         return new UserResource($user);
     }
 
