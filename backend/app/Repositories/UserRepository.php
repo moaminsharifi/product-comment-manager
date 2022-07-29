@@ -24,7 +24,7 @@ class UserRepository extends Repository implements UserRepositoryInterface
      * @param int $id
      * @return User
      */
-    public function getById(int $id): User
+    public function getById(int $id): ?User
     {
         return User::findOrFail($id);
     }
@@ -48,7 +48,7 @@ class UserRepository extends Repository implements UserRepositoryInterface
      * @param array $attributes
      * @return User
      */
-    public function create(array $attributes): User
+    public function create(array $attributes): ?User
     {
         return User::create($attributes);
     }
@@ -60,7 +60,7 @@ class UserRepository extends Repository implements UserRepositoryInterface
      * @param array $attributes
      * @return User
      */
-    public function update(int $id, array $attributes): User
+    public function update(int $id, array $attributes): ?User
     {
         return User::findOrFail($id)->update($attributes);
     }
@@ -71,7 +71,7 @@ class UserRepository extends Repository implements UserRepositoryInterface
      * @param string $email
      * @return User
      */
-    public function getByEmail(string $email): User
+    public function getByEmail(string $email): ?User
     {
         return User::where('email', $email)->first();
     }

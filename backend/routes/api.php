@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,14 +14,14 @@ use App\Http\Controllers\UserController;
 |
 */
 Route::group([
-    'prefix' => 'auth'
+    'prefix' => 'auth',
 ], function () {
-    Route::post('login', [UserController::class,'login'])->name('login');
-    Route::post('signup', [UserController::class,'signup'])->name('signup');
+    Route::post('login', [UserController::class, 'login'])->name('login');
+    Route::post('signup', [UserController::class, 'signup'])->name('signup');
 
     Route::group([
-        'middleware' => 'auth:sanctum'
-    ], function() {
-        Route::get('user', [UserController::class,'show'])->name('userData');
+        'middleware' => 'auth:sanctum',
+    ], function () {
+        Route::get('user', [UserController::class, 'show'])->name('userData');
     });
 });

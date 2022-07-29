@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Contracts\UserServiceInterface;
+use App\Helpers\CustomResponse;
 use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdatePasswordUserRequest;
@@ -11,7 +12,7 @@ use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Hash;
-use App\Helpers\CustomResponse;
+
 class UserService extends Service implements UserServiceInterface
 {
     /**
@@ -25,7 +26,7 @@ class UserService extends Service implements UserServiceInterface
     }
 
     /**
-     * get all users
+     * get all users.
      *
      * @return Collection
      */
@@ -33,10 +34,11 @@ class UserService extends Service implements UserServiceInterface
     {
         return $this->repository->getAll();
     }
+
     /**
-     * get user by is
+     * get user by is.
      *
-     * @param integer $id
+     * @param int $id
      * @return User
      */
     public function getById(int $id): User
@@ -45,10 +47,10 @@ class UserService extends Service implements UserServiceInterface
     }
 
     /**
-     * Delete user
+     * Delete user.
      *
-     * @param integer $id
-     * @return boolean
+     * @param int $id
+     * @return bool
      */
     public function deleteById(int $id): bool
     {
@@ -56,7 +58,7 @@ class UserService extends Service implements UserServiceInterface
     }
 
     /**
-     * Create new user
+     * Create new user.
      *
      * @param StoreUserRequest $request
      * @return User
@@ -69,8 +71,9 @@ class UserService extends Service implements UserServiceInterface
 
         return $this->repository->create($attributes);
     }
+
     /**
-     * update user fields
+     * update user fields.
      *
      * @param User $user
      * @param UpdateUserRequest $request
@@ -82,11 +85,12 @@ class UserService extends Service implements UserServiceInterface
         $attributes = $request->only(['name']);
 
         return $this->repository->update($user->id, [
-            'name'=>$attributes['name']
+            'name'=>$attributes['name'],
         ]);
     }
+
     /**
-     * update user Password
+     * update user Password.
      *
      * @param User $user
      * @param UpdatePasswordUserRequest $request
@@ -97,12 +101,14 @@ class UserService extends Service implements UserServiceInterface
         $request->validated();
         $attributes = $request->only(['password', 'old_password']);
         abort_unless(Hash::check($attributes['old_password'], $user->password), CustomResponse::createError('10002'));
+
         return $this->repository->update($user->id, [
-            'password'=>Hash::make($attributes['password'])
+            'password'=>Hash::make($attributes['password']),
         ]);
     }
+
     /**
-     * login new user
+     * login new user.
      *
      * @param LoginUserRequest $request
      * @return User
@@ -112,8 +118,8 @@ class UserService extends Service implements UserServiceInterface
         $request->validated();
         $attributes = $request->only(['email', 'password']);
         $user = $this->repository->getByEmail($attributes['email']);
-        abort_unless($user, CustomResponse::createError('10001') );
-        abort_unless(Hash::check($attributes['password'], $user->password), CustomResponse::createError('10002') );
+        abort_unless($user, CustomResponse::createError('10001'));
+        abort_unless(Hash::check($attributes['password'], $user->password), CustomResponse::createError('10002'));
 
         return $user;
     }
