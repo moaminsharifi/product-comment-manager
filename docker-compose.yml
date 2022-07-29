@@ -5,6 +5,8 @@ networks:
     external: true
 volumes:
   mariadb-data: null
+  redis-data:
+    driver: local
 services:
   product-comment-manager-backend:
     build: './_docker/backend/${ENVIRONMENT}'
@@ -28,3 +30,15 @@ services:
       - internal_network
     env_file:
       - ./db/.env
+  product-comment-manager-redis:
+    image: redis:6.2-alpine
+    restart: always
+    hostname: local-redis
+    volumes:
+      - 'redis-data:/data'
+    ports:
+      - '${EXPOSED_REDIS_PORT}:${INTERNAL_REDIS_PORT}'
+    networks:
+      - internal_network
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+
