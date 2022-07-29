@@ -29,12 +29,11 @@ class CommentController extends Controller
      * Store Comment.
      *
      * This endpoint Add new comment to system. If product not exist then create anonymous product.
-     *
-     *
      * @authenticated
      * @responseFile status=200 docs/responses/comment/store.success.json
      * @responseFile status=422 scenario="Invalid inputs"
      * @param  StoreCommentRequest  $request
+     * @param CommentPolicy $policy
      * @return Response
      */
     public function store(StoreCommentRequest $request, CommentPolicy $policy)
