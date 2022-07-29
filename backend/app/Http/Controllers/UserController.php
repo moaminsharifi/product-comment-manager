@@ -29,7 +29,7 @@ class UserController extends Controller
      *
      *  This endpoint Sing up new user and return token.
      *
-     * @responseFile status=200 docs/responses/user/data.success.json
+     * @responseFile status=201 docs/responses/user/data.success.json
      * @responseFile status=422 scenario="Invalid Name"  docs/responses/user/singup.invalid.name.json
      * @responseFile status=422 scenario="Invalid Email"  docs/responses/user/singup.invalid.email.json
      * @responseFile status=422 scenario="Invalid Email (exist in database)"  docs/responses/user/singup.invalid_exist.email.json
