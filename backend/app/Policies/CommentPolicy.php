@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Custom Policy
@@ -20,7 +21,12 @@ class CommentPolicy
      */
     public function create(User $user, Product $product)
     {
-        $userCommentOnProductCount = $user->comments()->where('product_id', $product->id)->count();
+        $userCommentOnProductCount = DB::table('comments')
+                ->join('user_comment', 'comments.id', '=', 'user_comment.comment_id')
+                ->join('product_comment', 'comments.id', '=', 'user_comment.comment_id')
+                ->where('user_id', $user->id)
+                ->where('product_id', $product->id)
+                ->count();
 
         return ($userCommentOnProductCount < 2) ? true : false;
     }
