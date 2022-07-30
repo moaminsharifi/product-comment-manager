@@ -6,11 +6,11 @@ return [
         'redis' => 'default',
         'json' => [
             'driver' => 'file',
-            'path' => 'warehouse.json',
+            'path' => 'storage/app/warehouse.json',
         ],
         'yml' => [
             'driver' => 'file',
-            'path' => 'warehouse.yml',
+            'path' => 'storage/app/warehouse.yml',
         ],
 
     ],
