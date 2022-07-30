@@ -1,7 +1,7 @@
 <?php
-use Illuminate\Support\Str;
-return [
 
+return [
+    'default' => 'yml',
     'connections' => [
         'redis' => 'default',
         'json' => [
@@ -11,7 +11,7 @@ return [
         'yml' => [
             'driver' => 'file',
             'path' => 'warehouse.yml',
-        ]
+        ],
 
     ],
 ];
