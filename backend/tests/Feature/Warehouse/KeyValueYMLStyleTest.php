@@ -2,15 +2,14 @@
 
 namespace Tests\Feature\Warehouse;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use Illuminate\Support\Facades\Storage;
 use App\Services\KeyValueYMLStyleWarehouse;
+use Illuminate\Support\Facades\Storage;
+use Tests\TestCase;
+
 class KeyValueYMLStyleTest extends TestCase
 {
-     /**
-     * add multi value to warehouse test
+    /**
+     * add multi value to warehouse test.
      * @test
      * @group Feature
      * @group Warehouse
@@ -25,32 +24,28 @@ class KeyValueYMLStyleTest extends TestCase
         Storage::disk($disk)->put($filePath, '');
         Storage::disk($disk)->assertExists($filePath);
         $fileFullPath = Storage::disk($disk)->path($filePath);
-        $warehouse->increment('A',$fileFullPath);
+        $warehouse->increment('A', $fileFullPath);
 
         $fileContent = Storage::disk($disk)->get($filePath);
         $this->assertTrue(str_contains($fileContent, 'A: 1'));
-       
 
-        $warehouse->increment('A',$fileFullPath);
+        $warehouse->increment('A', $fileFullPath);
         $fileContent = Storage::disk($disk)->get($filePath);
-        
+
         $this->assertTrue(str_contains($fileContent, 'A: 2'));
 
         // Add other key
-        $warehouse->increment('B',$fileFullPath);
+        $warehouse->increment('B', $fileFullPath);
         $fileContent = Storage::disk($disk)->get($filePath);
         $this->assertTrue(str_contains($fileContent, 'B: 1'));
 
-        $warehouse->increment('B',$fileFullPath);
+        $warehouse->increment('B', $fileFullPath);
         $fileContent = Storage::disk($disk)->get($filePath);
         $this->assertTrue(str_contains($fileContent, 'B: 2'));
-
-      
     }
 
-
     /**
-     * get value from warehouse test
+     * get value from warehouse test.
      * @test
      * @group Feature
      * @group Warehouse
@@ -65,15 +60,12 @@ class KeyValueYMLStyleTest extends TestCase
         Storage::disk($disk)->put($filePath, '');
         Storage::disk($disk)->assertExists($filePath);
         $fileFullPath = Storage::disk($disk)->path($filePath);
-        $warehouse->increment('A',$fileFullPath);
+        $warehouse->increment('A', $fileFullPath);
 
         $fileContent = Storage::disk($disk)->get($filePath);
         $this->assertTrue(str_contains($fileContent, 'A: 1'));
-       
 
-        $output = $warehouse->get('A',$fileFullPath);
-        $this->assertEquals(1 , $output);
-        
-      
+        $output = $warehouse->get('A', $fileFullPath);
+        $this->assertEquals(1, $output);
     }
 }
