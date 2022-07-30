@@ -1,18 +1,18 @@
 <?php
 
 namespace App\Services;
-use Symfony\Component\Process\Process;
-use Symfony\Component\Process\Exception\ProcessFailedException;
-use Symfony\Component\Process\ProcessBuilder;
+
 class KeyValueYMLStyleWarehouse extends BaseWarehouse
 {
     protected function runCommand($command)
     {
-        $output=null;
-        $retval=null;
+        $output = null;
+        $retval = null;
         exec($command, $output, $retval);
+
         return $output;
     }
+
     /**
      * increment.
      *
@@ -20,49 +20,46 @@ class KeyValueYMLStyleWarehouse extends BaseWarehouse
      * @return void
      */
     public function increment(string $key, $filePath = false)
-    {       
-        if(!$filePath){
+    {
+        if (!$filePath) {
             $filePath = storage_path(config('warehouse.connections.yml.path'));
         }
         $command = "grep {$key} {$filePath}";
         $output = $this->runCommand($command);
-        $existInFile =  count($output) ? true : false;
+        $existInFile = count($output) ? true : false;
 
         if ($existInFile) {
             // get oldValue
-            $valuesInFile = explode(":", $output[0]);
-            $oldValue = (int)$valuesInFile[1];
+            $valuesInFile = explode(':', $output[0]);
+            $oldValue = (int) $valuesInFile[1];
             $newValue = $oldValue + 1;
 
-            $command = sprintf("sed -ir 's/^[#]*\s*%s: .*/%s: %u/' %s",$key,$key,$newValue,$filePath);
-            $output =  $this->runCommand($command);
+            $command = sprintf("sed -ir 's/^[#]*\s*%s: .*/%s: %u/' %s", $key, $key, $newValue, $filePath);
+            $output = $this->runCommand($command);
         } else {
             $command = "echo '{$key}: 1' >> {$filePath}";
             $output = $this->runCommand($command);
         }
-        
-
-        
     }
+
     /**
-     * get specific key
+     * get specific key.
      *
      * @param string $key
      * @return value
      */
-    public function get(string $key, $filePath = false){
-        if(!$filePath){
+    public function get(string $key, $filePath = false)
+    {
+        if (!$filePath) {
             $filePath = storage_path(config('warehouse.connections.yml.path'));
         }
         try {
-            $command = sprintf('sed -rn "s/^%s: ([^\n]+)$/\1/p" %s',$key,$filePath);
+            $command = sprintf('sed -rn "s/^%s: ([^\n]+)$/\1/p" %s', $key, $filePath);
             $output = $this->runCommand($command);
+
             return  $output[0];
         } catch (\Throwable $th) {
             return 0;
         }
-        
-
     }
-
 }

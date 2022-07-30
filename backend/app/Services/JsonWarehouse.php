@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Services;
+
 use Illuminate\Support\Facades\Storage;
+
 class JsonWarehouse extends BaseWarehouse
 {
     /**
-     * Read File as json
+     * Read File as json.
      *
      * @return array
      */
@@ -16,8 +18,10 @@ class JsonWarehouse extends BaseWarehouse
         } catch (\Throwable $th) {
             Storage::put(config('warehouse.connections.json.path'), '{}');
         }
+
         return $jsonData;
     }
+
     /**
      * increment key in database.
      *
@@ -27,28 +31,25 @@ class JsonWarehouse extends BaseWarehouse
     public function increment(string $key)
     {
         $jsonData = $this->readFile();
-        $jsonData[$key] = array_key_exists($key , $jsonData)? $jsonData[$key] + 1 : 0; 
-        
+        $jsonData[$key] = array_key_exists($key, $jsonData) ? $jsonData[$key] + 1 : 0;
+
         try {
             Storage::put(config('warehouse.connections.json.path'), json_encode($jsonData));
         } catch (\Throwable $th) {
             //throw $th;
         }
-        
-        
-
     }
+
     /**
-     * Get key
+     * Get key.
      *
      * @param string $key
      * @return void
      */
-    public function get(string $key){
-
+    public function get(string $key)
+    {
         $jsonData = $this->readFile();
-        return array_key_exists($key , $jsonData)? $jsonData[$key]  : '';
+
+        return array_key_exists($key, $jsonData) ? $jsonData[$key] : '';
     }
-
-
 }
