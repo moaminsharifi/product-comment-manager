@@ -6,6 +6,7 @@ php artisan route:cache
 php artisan cache:clear
 php artisan config:clear
 php artisan optimize
+# php artisan passport:install
 #php artisan migrate --force
 
 # chmod -R 777 /var/www/html/storage
