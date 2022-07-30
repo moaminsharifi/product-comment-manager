@@ -13,8 +13,8 @@ services:
     hostname: local-backend
     volumes:
       - './backend:/var/www/html'
-      - '${WAREHOUSE_JSON_FULL_PATH}:/var/www/html/storage/warehouse.json'
-      - '${WAREHOUSE_YML_FULL_PATH}:/var/www/html/storage/warehouse.yml'
+      - '${WAREHOUSE_JSON_FULL_PATH}:/var/www/html/storage/app/warehouse.json'
+      - '${WAREHOUSE_YML_FULL_PATH}:/var/www/html/storage/app/warehouse.yml'
     ports:
       - '${EXPOSED_BACKEND_PORT}:${INTERNAL_BACKEND_PORT}'
     networks:
