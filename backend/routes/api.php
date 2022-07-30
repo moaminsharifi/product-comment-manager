@@ -22,21 +22,21 @@ Route::group([
     Route::post('signup', [UserController::class, 'signup'])->name('signup');
 
     Route::group([
-        'middleware' => 'auth:sanctum',
+        'middleware' => 'auth:api',
     ], function () {
         Route::get('user', [UserController::class, 'show'])->name('userData');
     });
 });
 Route::group([
     'prefix' => 'products',
-    'middleware' => 'auth:sanctum',
+    'middleware' => 'auth:api',
 ], function () {
     Route::get('/', [ProductController::class, 'index'])->name('getAllProducts');
 });
 
 Route::group([
     'prefix' => 'comments',
-    'middleware' => 'auth:sanctum',
+    'middleware' => 'auth:api',
 ], function () {
     Route::post('/', [CommentController::class, 'store'])->name('AddNewComment');
 });
