@@ -22,8 +22,9 @@ class KeyValueYMLStyleWarehouse extends BaseWarehouse
     public function increment(string $key, $filePath = false)
     {
         if (!$filePath) {
-            $filePath = storage_path(config('warehouse.connections.yml.path'));
+            $filePath = config('warehouse.connections.yml.path');
         }
+       
         $command = "grep {$key} {$filePath}";
         $output = $this->runCommand($command);
         $existInFile = count($output) ? true : false;
@@ -33,9 +34,10 @@ class KeyValueYMLStyleWarehouse extends BaseWarehouse
             $valuesInFile = explode(':', $output[0]);
             $oldValue = (int) $valuesInFile[1];
             $newValue = $oldValue + 1;
-
-            $command = sprintf("sed -ir 's/^[#]*\s*%s: .*/%s: %u/' %s", $key, $key, $newValue, $filePath);
+            
+            $command = sprintf("sed -ir 's/^[#]*\s*%s: .*/%s: %u/' %s", $key, $key, $newValue, $filePath);     
             $output = $this->runCommand($command);
+            
         } else {
             $command = "echo '{$key}: 1' >> {$filePath}";
             $output = $this->runCommand($command);
