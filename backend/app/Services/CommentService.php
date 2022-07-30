@@ -12,25 +12,29 @@ use App\Repositories\ProductRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
+use App\Jobs\IncrementCommentOfProductJob;
+use App\Contracts\IncrementalWarehouseInterface;
 
 class CommentService extends Service
 {
-    private $userRepository;
-    private $productRepository;
-    private $commentRepository;
-
+    protected $userRepository;
+    protected $productRepository;
+    protected $commentRepository;
+    protected $warehouse;
     /**
      * Constructor function.
      *
      * @param UserRepository $userRepository
      * @param ProductRepository $productRepository
      * @param CommentRepository $commentRepository
+     * @param IncrementalWarehouseInterface $warehouse
      */
-    public function __construct(UserRepository $userRepository, ProductRepository $productRepository, CommentRepository $commentRepository)
+    public function __construct(UserRepository $userRepository, ProductRepository $productRepository, CommentRepository $commentRepository, IncrementalWarehouseInterface $warehouse)
     {
         $this->userRepository = $userRepository;
         $this->productRepository = $productRepository;
         $this->commentRepository = $commentRepository;
+        $this->warehouse = $warehouse;
     }
 
     /**
@@ -86,6 +90,7 @@ class CommentService extends Service
             $comment = $this->commentRepository->create(['comment'=>$attributes['comment']]);
             $product->comments()->attach($comment->id);
             $user->comments()->attach($comment->id);
+            dispatch(new IncrementCommentOfProductJob($product->name, $this->warehouse));
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
