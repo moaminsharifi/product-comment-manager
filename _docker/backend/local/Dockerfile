@@ -62,6 +62,7 @@ VOLUME ["/var/www/html"]
 # PREPARE CONTAINER START
 RUN chown -R www-data:www-data /var/www/html
 COPY resources/startup.sh /usr/local/bin/startup.sh
+COPY resources/queue-worker.conf /etc/supervisor/conf.d/queue-worker.conf
 RUN chmod 774 /usr/local/bin/startup.sh
 
 
