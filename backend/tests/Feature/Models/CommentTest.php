@@ -2,11 +2,15 @@
 
 namespace Tests\Feature\Models;
 
+use App\Events\CommentCreatedEvent;
+use App\Models\Comment;
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
-
+use Illuminate\Support\Facades\Bus;
+use App\Jobs\IncrementCommentOfProductJob;
 class CommentTest extends TestCase
 {
     /**
@@ -26,19 +30,4 @@ class CommentTest extends TestCase
         );
     }
 
-    /**
-     * product belong to user test.
-     * @test
-     * @group Feature
-     * @group Comment
-     * @return void
-     */
-    public function product_belong_to_user()
-    {
-        $user = User::factory()->create();
-        $product = Product::factory()->create(['creator_id' => $user->id]);
-
-        // check creator of user
-        $this->assertInstanceOf(User::class, $product->creator);
-    }
 }
