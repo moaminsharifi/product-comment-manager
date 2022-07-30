@@ -18,7 +18,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'token'=> $this->createToken('authToken')->plainTextToken,
+            'token'=> $this->createToken('authToken')->accessToken,
             'token_type' => 'Bearer',
         ];
     }
