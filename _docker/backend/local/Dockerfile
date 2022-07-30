@@ -34,9 +34,11 @@ RUN docker-php-ext-install zip
 # RUN pecl install xdebug \
 #     && docker-php-ext-enable xdebug
 # Install Swoole extension
-
-# RUN pecl install openswoole-4.10.0
-# RUN docker-php-ext-enable openswoole
+RUN docker-php-ext-configure pcntl --enable-pcntl \
+  && docker-php-ext-install \
+    pcntl
+RUN pecl install swoole
+RUN docker-php-ext-enable swoole
 #INSTALL VIA MANUALLY
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
