@@ -7,6 +7,10 @@ return [
         'json' => [
             'driver' => 'file',
             'path' => 'warehouse.json',
+        ],
+        'yml' => [
+            'driver' => 'file',
+            'path' => 'warehouse.yml',
         ]
 
     ],
