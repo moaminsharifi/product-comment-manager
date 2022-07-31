@@ -23,7 +23,7 @@ class CommentPolicy
     {
         $userCommentOnProductCount = DB::table('comments')
                 ->join('user_comment', 'comments.id', '=', 'user_comment.comment_id')
-                ->join('product_comment', 'comments.id', '=', 'user_comment.comment_id')
+                ->join('product_comment', 'comments.id', '=', 'product_comment.comment_id')
                 ->where('user_id', $user->id)
                 ->where('product_id', $product->id)
                 ->count();
