@@ -11,5 +11,5 @@ php artisan passport:install
 #php artisan migrate --force
 service supervisor start 
 # chmod -R 777 /var/www/html/storage
-php artisan octane:start --host=0.0.0.0 --port=8000
-# php artisan serve --host=0.0.0.0 --port=8000
+# php artisan octane:start --host=0.0.0.0 --port=8000
+php artisan serve --host=0.0.0.0 --port=8000
