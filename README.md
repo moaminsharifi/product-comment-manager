@@ -12,8 +12,9 @@
     - [Solving I/O write with `Warehouse`s](#solving-io-write-with-warehouses)
       - [Backend API docs](#backend-api-docs)
   - [Run project with docker compose](#run-project-with-docker-compose)
-    - [build with docker-compose](#build-with-docker-compose)
-    - [up with docker-compose](#up-with-docker-compose)
+    - [1- Copy env file with](#1--copy-env-file-with)
+    - [2- build with docker-compose](#2--build-with-docker-compose)
+    - [3- up with docker-compose](#3--up-with-docker-compose)
     - [connect to containers](#connect-to-containers)
 
 
@@ -114,16 +115,22 @@ For solving `Warehouse` I/O I use job queue, when user want to create new commen
 there is automatic api documentation generated with scribe under `backend/docs` and you can use them, `openapi.yaml` and `collection.json` for post man
 
 ## Run project with docker compose
-### build with docker-compose
+
+### 1- Copy env file with
+```
+cp .env.example .env
+```
+### 2- build with docker-compose
 *for first time need to create network with `docker network create product-comment-manager`*
 ```bash
 docker compose build
 ```
-### up with docker-compose
+### 3- up with docker-compose
 
 ```bash
 docker compose up
 ```
+---
 ### connect to containers
 ```bash
 docker exec -ti CONTAINER_NAME sh
